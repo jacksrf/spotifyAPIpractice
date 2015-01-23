@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div>
+      <input type="text" id="bandInput">
+      <input type="submit" id="button">
+    </div>
+    <div id="bandInfo">
+
+    </div>
+
+  </body>
+  <script>
+
+    var bandInput = document.getElementById("bandInput");
+
+    button.addEventListener('click', function() {
+      var bandInputValue = bandInput.value;
+      var band = bandInputValue.replace(" ","+");
+
+      console.log("here");
+      var url = "https://api.spotify.com/v1/search?q=artist:" + band + "&type=artist";
+      var xhr = new XMLHttpRequest();
+
+      console.log(url);
+
+      xhr.open("GET", url);
+      xhr.addEventListener('load', function(e) {
+          // console.log(xhr.responseText);
+          var data = JSON.parse(xhr.responseText);
+          var name = data.artists.items[0].name;
+          var image = data.artists.items[0].images[1].url;
+          var id = data.artists.items[0].id;
+
+
+          var bandInfo = document.getElementById("bandInfo");
+
+          var bandName = document.createElement("h1");
+          bandName.innerText = name;
+          bandInfo.appendChild(bandName);
+
+          var bandImage = document.createElement("img");
+          bandImage.setAttribute("href", "#");
+          bandImage.setAttribute("src", image);
+          bandInfo.appendChild(bandImage);
+
+          bandImage.addEventListener('click', function() {
+            var url2 = "https://api.spotify.com/v1/artists/" + id + "/albums";
+            var xhr = new XMLHttpRequest();
+
+            console.log(url);
+
+            xhr.open("GET", url2);
+            xhr.addEventListener('load', function(e) {
+              console.log(xhr.responseText);
+            })
+          })
+
+        });
+      xhr.send();
+    });
+  </script>
+</html>
