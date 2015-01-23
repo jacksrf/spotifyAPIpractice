@@ -50,12 +50,35 @@
             var url2 = "https://api.spotify.com/v1/artists/" + id + "/albums";
             var xhr = new XMLHttpRequest();
 
-            console.log(url);
+            console.log(url2);
 
             xhr.open("GET", url2);
             xhr.addEventListener('load', function(e) {
               console.log(xhr.responseText);
+              var data2 = JSON.parse(xhr.responseText);
+              var itemsArray = data2.items;
+              var albumsDiv = document.createElement("div");
+              albumsDiv.style.display = "block";
+              bandInfo.appendChild(albumsDiv);
+
+              bandInfo.removeChild(bandImage);
+
+              for (i=0; i<itemsArray.length; i++) {
+                var title2 = data2.items[i].name;
+                var image2 = data2.items[i].images[1].url;
+
+                var albumTitle = document.createElement("h3");
+                albumTitle.innerText = title2;
+                albumsDiv.appendChild(albumTitle);
+
+                var albumImage = document.createElement("img");
+                albumImage.setAttribute("href", "#");
+                albumImage.setAttribute("src", image2);
+                albumsDiv.appendChild(albumImage);
+              }
+
             })
+            xhr.send();
           })
 
         });
