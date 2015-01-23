@@ -1,5 +1,6 @@
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <title></title>
   </head>
   <body>
@@ -7,76 +8,104 @@
       <input type="text" id="bandInput">
       <input type="submit" id="button">
     </div>
-    <div id="bandInfo">
-
+    <div id="infoWrap">
+      <div id="sidebar">
+      </div>
+      <div id="bandInfo">
+      </div>
     </div>
 
   </body>
   <script>
 
-    var bandInput = document.getElementById("bandInput");
+    // var bandInput = document.getElementById("bandInput");
 
-    button.addEventListener('click', function() {
-      var bandInputValue = bandInput.value;
-      var band = bandInputValue.replace(" ","+");
+    // button.addEventListener('click', function() {
+    //   var bandInputValue = bandInput.value;
+    //   var band = bandInputValue.replace(" ","+");
+    //
+    //   console.log("here");
+    //   var url = "https://api.spotify.com/v1/search?q=artist:" + band + "&type=artist";
+    //   var xhr = new XMLHttpRequest();
+    //
+    //   console.log(url);
+    //
+    //   xhr.open("GET", url);
+    //   xhr.addEventListener('load', function(e) {
+    //       // console.log(xhr.responseText);
+    //       var data = JSON.parse(xhr.responseText);
+    //       var name = data.artists.items[0].name;
+    //       var image = data.artists.items[0].images[1].url;
+    //       var id = data.artists.items[0].id;
+    //
+    //
+    //       var bandInfo = document.getElementById("bandInfo");
+    //
+    //       var bandName = document.createElement("h1");
+    //       bandName.innerText = name;
+    //       bandInfo.appendChild(bandName);
+    //
+    //       var bandImage = document.createElement("img");
+    //       bandImage.setAttribute("href", "#");
+    //       bandImage.setAttribute("src", image);
+    //       bandInfo.appendChild(bandImage);
 
-      console.log("here");
-      var url = "https://api.spotify.com/v1/search?q=artist:" + band + "&type=artist";
-      var xhr = new XMLHttpRequest();
+          // bandImage.addEventListener('click', function() {
+          //   var url2 = "https://api.spotify.com/v1/artists/" + id + "/albums";
+          //   var xhr = new XMLHttpRequest();
+          //
+          //   // console.log(url2);
+          //
+          //   xhr.open("GET", url2);
+          //   xhr.addEventListener('load', function(e) {
+          //     // console.log(xhr.responseText);
+          //     var data2 = JSON.parse(xhr.responseText);
+          //     var itemsArray = data2.items;
+          //     var albumsDiv = document.createElement("div");
+          //     albumsDiv.style.display = "block";
+          //     bandInfo.appendChild(albumsDiv);
+          //
+          //     bandInfo.removeChild(bandImage);
+          //
+          //     // var url3 = "https://api.spotify.com/v1/albums/" + albumId + "/tracks"
+          //     // var xhr = new XMLHttpRequest();
+          //     //
+          //     // console.log(url3);
+          //     //
+          //     // xhr.open("GET", url3);
+          //     // xhr.addEventListener('load', function(e) {
+          //       // var data3 = JSON.parse(xhr.responseText);
+          //       // console.log(data3);
+          //     for (i=0; i<itemsArray.length; i++) {
+          //       var title2 = data2.items[i].name;
+          //       var image2 = data2.items[i].images[1].url;
+          //       var spotifyURL = data2.items[i].external_urls.spotify;
+          //       console.log(spotifyURL);
+          //
+          //       var eachAlbum = document.createElement("div");
+          //       eachAlbum.setAttribute("id", title2);
+          //       eachAlbum.setAttribute("name", "album");
+          //       eachAlbum.style.width = "30%";
+          //       eachAlbum.style.display = "inline-block";
+          //       albumsDiv.appendChild(eachAlbum);
+          //
+          //       var albumTitle = document.createElement("h3");
+          //       albumTitle.innerText = title2;
+          //       eachAlbum.appendChild(albumTitle);
+          //
+          //       var albumImage = document.createElement("img");
+          //       // albumImage.setAttribute("href", spotifyURL);
+          //       albumImage.setAttribute("src", image2);
+          //       eachAlbum.appendChild(albumImage);
+          //
+          //       var albumButton = document.createElement("a");
+          //       albumButton.setAttribute("href", spotifyURL);
+          //       albumButton.innerText = "Visit in Spotify";
+          //       eachAlbum.appendChild(albumButton);
+          //     }
 
-      console.log(url);
-
-      xhr.open("GET", url);
-      xhr.addEventListener('load', function(e) {
-          // console.log(xhr.responseText);
-          var data = JSON.parse(xhr.responseText);
-          var name = data.artists.items[0].name;
-          var image = data.artists.items[0].images[1].url;
-          var id = data.artists.items[0].id;
-
-
-          var bandInfo = document.getElementById("bandInfo");
-
-          var bandName = document.createElement("h1");
-          bandName.innerText = name;
-          bandInfo.appendChild(bandName);
-
-          var bandImage = document.createElement("img");
-          bandImage.setAttribute("href", "#");
-          bandImage.setAttribute("src", image);
-          bandInfo.appendChild(bandImage);
-
-          bandImage.addEventListener('click', function() {
-            var url2 = "https://api.spotify.com/v1/artists/" + id + "/albums";
-            var xhr = new XMLHttpRequest();
-
-            console.log(url2);
-
-            xhr.open("GET", url2);
-            xhr.addEventListener('load', function(e) {
-              console.log(xhr.responseText);
-              var data2 = JSON.parse(xhr.responseText);
-              var itemsArray = data2.items;
-              var albumsDiv = document.createElement("div");
-              albumsDiv.style.display = "block";
-              bandInfo.appendChild(albumsDiv);
-
-              bandInfo.removeChild(bandImage);
-
-              for (i=0; i<itemsArray.length; i++) {
-                var title2 = data2.items[i].name;
-                var image2 = data2.items[i].images[1].url;
-
-                var albumTitle = document.createElement("h3");
-                albumTitle.innerText = title2;
-                albumsDiv.appendChild(albumTitle);
-
-                var albumImage = document.createElement("img");
-                albumImage.setAttribute("href", "#");
-                albumImage.setAttribute("src", image2);
-                albumsDiv.appendChild(albumImage);
-              }
-
+              // });
+              // xhr.send();
             })
             xhr.send();
           })
