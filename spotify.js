@@ -7,6 +7,7 @@ var searchCheck = false;
 
 
 var artistSearch = function(urlInfo) {
+
     var url = "https://api.spotify.com/v1/search?q=artist:" + urlInfo + "&type=artist";
     var xhr = new XMLHttpRequest();
 
@@ -18,19 +19,23 @@ var artistSearch = function(urlInfo) {
         var data = JSON.parse(xhr.responseText);
         console.log(data);
         var itemsArray = data.artists.items;
-      for (i=0; i<itemsArray.length; i++) {
-        var name = data.artists.items[i].name;
-        var image = data.artists.items[i].images[1].url;
-        var id = data.artists.items[i].id;
-        var idObj = {bandName: name, bandId: id}
-        currentArtists.push(idObj);
 
         var musicInfo = document.getElementById("musicInfo");
         var bandSearchDiv = document.createElement("div");
         // bandSearchDiv.setAttribute("name","artistSearch");
         bandSearchDiv.setAttribute("id", "currentDiv");
         bandSearchDiv.setAttribute("class", "artists");
+        // bandSearchDiv.style.width = "100%";
+        // bandSearchDiv.style.display = "inline-block";
         musicInfo.appendChild(bandSearchDiv);
+
+
+      for (i=0; i<itemsArray.length; i++) {
+        var name = data.artists.items[i].name;
+        var image = data.artists.items[i].images[1].url;
+        var id = data.artists.items[i].id;
+        var idObj = {bandName: name, bandId: id}
+        currentArtists.push(idObj);
 
         var bandName = document.createElement("h1");
         bandName.innerText = name;
@@ -55,6 +60,7 @@ var artistSearch = function(urlInfo) {
 }
 
 var getAlbums = function(bandName,id) {
+  console.log(currentArtists)
   var url2 = "https://api.spotify.com/v1/artists/" + id + "/albums";
   var xhr = new XMLHttpRequest();
 
@@ -72,8 +78,14 @@ var getAlbums = function(bandName,id) {
     var albumsDiv = document.createElement("div");
     albumsDiv.setAttribute("id", "currentDiv")
     albumsDiv.setAttribute("class", "albums")
-    albumsDiv.style.display = "block";
+    albumsDiv.style.width = "100%";
+    albumsDiv.style.display = "inline-block";
     musicInfo.appendChild(albumsDiv);
+
+    var sideBar = document.getElementById("sideBar");
+    var currentSideBar = document.createElement("div");
+    currentSideBar.setAttribute("id", "currentSideBar");
+    sideBar.appendChild(currentSideBar);
     // var url3 = "https://api.spotify.com/v1/albums/" + albumId + "/tracks"
     // var xhr = new XMLHttpRequest();
     //
@@ -94,7 +106,8 @@ var getAlbums = function(bandName,id) {
       var eachAlbum = document.createElement("div");
       eachAlbum.setAttribute("id", title2);
       eachAlbum.setAttribute("name", "album");
-      eachAlbum.style.width = "30%";
+      eachAlbum.setAttribute("class", "albumContainer");
+      // eachAlbum.style.width = "30%";
       eachAlbum.style.display = "inline-block";
       albumsDiv.appendChild(eachAlbum);
 
@@ -113,6 +126,18 @@ var getAlbums = function(bandName,id) {
       albumImage.setAttribute("src", image2);
       albumButton.appendChild(albumImage);
 
+      //sidebar create
+
+      var eachSideBarAlbum = document.createElement("div");
+      eachSideBarAlbum.setAttribute("class", "sideAlbumButton");
+      currentSideBar.appendChild(eachSideBarAlbum);
+
+      var sideAlbumButton = document.createElement("a");
+      sideAlbumButton.setAttribute("name", title2);
+      sideAlbumButton.innerText = title2;
+      sideAlbumButton.setAttribute("href", "#");
+      eachSideBarAlbum.appendChild(sideAlbumButton);
+
       var albumObj = {bandName: name, albumName: title2, albumId: albumId, albumImage: image2, albumURL: spotifyURL };
       currentAlbums.push(albumObj);
 
@@ -123,6 +148,7 @@ var getAlbums = function(bandName,id) {
 }
 
 var getTracks = function(artistName, albumName, albumId, albumImage, albumURL) {
+  console.log(currentAlbums);
   var url3 = "https://api.spotify.com/v1/albums/" + albumId + "/tracks";
   var xhr = new XMLHttpRequest();
 
@@ -133,6 +159,9 @@ var getTracks = function(artistName, albumName, albumId, albumImage, albumURL) {
 
     var removeDiv = document.getElementById("currentDiv");
     musicInfo.removeChild(removeDiv);
+
+    var removeSideBar = document.getElementById("currentSideBar");
+    sideBar.removeChild(removeSideBar);
 
     var tracksDiv = document.createElement("div");
     tracksDiv.setAttribute("id", "currentDiv")
@@ -184,6 +213,7 @@ button.addEventListener('click', function() {
       console.log("check false");
       searchCheck = true;
       artistSearch(band);
+
     }
   });
 
@@ -204,6 +234,7 @@ musicDiv.addEventListener('click', function(ev) {
           var currentArtistName = obj.bandName;
           var currentArtistId = obj.bandId;
           console.log(currentArtistId);
+          currentArtists = [];
           getAlbums(currentArtistName,currentArtistId);
           }
         })
@@ -219,7 +250,9 @@ musicDiv.addEventListener('click', function(ev) {
             var currentAlbumId = obj.albumId;
             var currentAlbumImage = obj.albumImage;
             var currentAlbumURL = obj.albumURL;
+            currentAlbums = [];
             getTracks(currentArtistName, currentAlbumName, currentAlbumId, currentAlbumImage, currentAlbumURL);
+
           }
         })
 

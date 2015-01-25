@@ -3,27 +3,144 @@
    License: none (public domain)
 */
 
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+#headerWrap {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  /*background-color: green;*/
+}
+
+#headerWrap h1 {
+  margin: auto;
+  font-weight: 3em;
+  font-family: 'Montserrat', sans-serif;
+}
+
+div#searchBar {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#searchItems {
+  margin: auto;
+}
+
+
 div#infoWrap {
   width: 100%;
   display: flex;
+  height: 100%;
 }
 
 div#sidebar {
   width: 20%;
-  height: 400px;
+  height: 100%;
   margin: auto;
-  background-color: blue;
+  /*background-color: ;*/
 
 }
 
 div#musicInfo {
   width: 80%;
   margin: auto;
-  height: 400px;
+  height: 100%;
+  display: flex;
+  /*background-color: grey;*/
+}
+
+
+
+#currentDiv {
+  margin: auto;
+  display: inline-block;
+  width: 33%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#currentDiv h1 {
+  margin: auto;
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+
+#currentDiv img {
+  margin: auto;
+  width: 100%;
+  float: left;
+}
+
+#currentDiv a {
+  margin: auto;
+  width: 100%;
+  float: left;
+  text-align: center;
+  text-decoration: none;
+}
+
+#currentDiv .albumContainer {
+  font-family: 'Montserrat', sans-serif;
+  margin: auto;
+  width: 33%;
+  height: 300px;
+  background-color: dodgerblue;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+#currentDiv .albumContainer h3 {
+  width: 90%;
+  margin-left: 5%;
+  font-size: 21px;
+  text-align: center;
+  height: 50px;
+}
+
+#currentDiv .albumContainer a {
+  margin: auto;
+  width:100%;
+}
+
+#currentDiv .albumContainer a img {
+  width: 70%;
+  height: 70%;
+  margin-left: 15%;
+}
+
+#currentSideBar {
+  width: 98%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+div.sideAlbumButton {
+  font-family: 'Montserrat', sans-serif;
+  height: 50px;
+  width: 100%;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+  border-right: 2px solid white;
+  /*border-bottom: 2px solid white;*/
+  background-color: darkblue;
+  display: flex;
+  font-size: 13px;
+}
+
+div.sideAlbumButton a {
+  margin: auto;
+  text-decoration: none;
+  color: white;
 }
 
 iframe {
-  width: 300; 
+  width: 300;
   height: 80;
   frameborder: 0;
   allowtransparency: true;
